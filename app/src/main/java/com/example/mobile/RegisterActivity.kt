@@ -42,7 +42,8 @@ class RegisterActivity : AppCompatActivity() {
 
                     databaseRef.setValue(utilizadores).addOnCompleteListener{
                         if(it.isSuccessful){
-                            Toast.makeText(this, "Pode Iniciar Sessão", Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this, HomeActivity::class.java)
+                            startActivity(intent)
                         }else{
                             Toast.makeText(this, "Tente Novamente, Algo correu mal !", Toast.LENGTH_SHORT).show()
                         }

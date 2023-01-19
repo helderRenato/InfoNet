@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         handler.postDelayed(Runnable {
             if (firebaseAuth.currentUser != null){
                 //Se o utilizador ja estiver autenticado redirecionar para o home
-                val intent = Intent(this, RegisterActivity::class.java)
+                val intent = Intent(this, HomeActivity::class.java)
                 startActivity(intent)
             }else{
                 //Se não redirecionar para o login
