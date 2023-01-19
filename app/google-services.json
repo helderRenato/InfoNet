@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "938269706484",
+    "project_id": "infonet-32925",
+    "storage_bucket": "infonet-32925.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:938269706484:android:506f4b2288aacd58f1f6a1",
+        "android_client_info": {
+          "package_name": "com.example.mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "938269706484-ebm3qpdeh6hdnhqhop857c9149heihme.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCr7DCICWjyXjdDOQXMHmXCcBJ2mLNHAxA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "938269706484-ebm3qpdeh6hdnhqhop857c9149heihme.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
