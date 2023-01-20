@@ -5,7 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.mobile.R
+import com.example.mobile.adapter.HomeAdapter
+import com.example.mobile.api.model.Noticia
+import com.example.mobile.api.model.RespostaAPI
+import com.example.peoplefinder.API.retrofit.RetrofitInitializer
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,7 +44,21 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_home, container, false)
+
+        //get Noticias
+        getNoticias("", "us", "entertainment") {
+            if (it != null) {
+                //configure List
+                val noticia : List<Noticia> = it.articles
+                val recyclerView: RecyclerView = view.findViewById(R.id.reciclerViewHome)
+                recyclerView.setHasFixedSize(true)
+                recyclerView.adapter = HomeAdapter(noticia, this)
+                val layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
+                recyclerView.layoutManager = layoutManager
+            }
+        }
+        return view
     }
 
     companion object {
@@ -56,5 +79,23 @@ class HomeFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    //Buscar as noticias
+    private fun getNoticias(q: String, country: String, category: String, onResult: (RespostaAPI?) -> Unit){
+        val call = RetrofitInitializer().noticiaService().getNoticias(q, "2b41d00aef9043cc84784b6fab8c7f0d", country, category)
+        call.enqueue(
+            object : Callback<RespostaAPI> {
+                override fun onFailure(call: Call<RespostaAPI>, t: Throwable) {
+                    t.printStackTrace()
+                    onResult(null)
+                }
+
+                override fun onResponse(call: Call<RespostaAPI>, response: Response<RespostaAPI>) {
+                    val addedUser = response.body()
+                    onResult(addedUser)
+                }
+            }
+        )
     }
 }
