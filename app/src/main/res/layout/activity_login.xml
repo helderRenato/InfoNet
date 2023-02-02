@@ -87,7 +87,7 @@
         android:layout_marginTop="190dp"
         android:layout_marginBottom="189dp"
         android:text="Registe-se"
-        android:onClick="redirectToLogin"
+        android:onClick="redirectToRegister"
         android:textColor="#18A9FA"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView12"

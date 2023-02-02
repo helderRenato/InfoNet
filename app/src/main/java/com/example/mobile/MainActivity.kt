@@ -1,10 +1,10 @@
 package com.example.mobile
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
@@ -25,15 +25,19 @@ class MainActivity : AppCompatActivity() {
                 //Se o utilizador ja estiver autenticado redirecionar para o home
                 val intent = Intent(this, HomeActivity::class.java)
                 startActivity(intent)
+                finish()
             }else{
                 //Se não redirecionar para o login
                 val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
+                finish()
             }
         }, 2000)
 
 
     }
+
+
 
     fun redirectToRegister(view: View) {
         val intent = Intent(this, RegisterActivity::class.java)
