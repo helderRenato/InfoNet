@@ -1,5 +1,6 @@
 package com.example.mobile.fragment
 
+import android.app.ProgressDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -48,6 +49,7 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_search, container, false)
+
         var filtroSelecionado : String = "business"
         //Fazer a pesquisa para o filtro de business já que é o filtro padrão da app
         callGetNoticias("","business", view)
@@ -155,7 +157,9 @@ class SearchFragment : Fragment() {
     }
 
     private fun callGetNoticias(q: String, filtro: String, view: View){
-
+        val progressDialog : ProgressDialog = ProgressDialog(view.context)
+        progressDialog.setTitle("A procurar...")
+        progressDialog.show()
         getNoticias(q, "us", filtro) {
             if (it != null) {
                 //configure List
@@ -167,6 +171,7 @@ class SearchFragment : Fragment() {
                 recyclerView.layoutManager = layoutManager
             }
         }
+        progressDialog.dismiss()
     }
 
     public fun replaceFragment(fragment: Fragment){
