@@ -2,24 +2,21 @@ package com.example.mobile.adapter
 
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobile.R
 import com.example.mobile.api.model.Noticia
 import com.example.mobile.fragment.HomeFragment
 import com.example.mobile.fragment.NoticiaFragment
+import com.example.mobile.fragment.SearchFragment
 import com.squareup.picasso.Picasso
 
-class HomeAdapter(private val noticias: List<Noticia>?, private val context: HomeFragment):
-    RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
+class SearchAdapter(private val noticias: List<Noticia>?, private val context: SearchFragment):
+    RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val noticia = noticias?.get(position)
@@ -40,7 +37,7 @@ class HomeAdapter(private val noticias: List<Noticia>?, private val context: Hom
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bindView(noticia: Noticia, context: HomeFragment) {
+        fun bindView(noticia: Noticia, context: SearchFragment) {
             val image = itemView.findViewById<ImageView>(R.id.noticiaImg)
             val titulo = itemView.findViewById<TextView>(R.id.noticiaTit)
             val data = itemView.findViewById<TextView>(R.id.noticiaDt)
