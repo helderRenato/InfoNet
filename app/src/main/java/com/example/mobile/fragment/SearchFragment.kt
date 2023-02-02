@@ -48,9 +48,9 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_search, container, false)
-
+        var filtroSelecionado : String = "business"
         //Fazer a pesquisa para o filtro de business já que é o filtro padrão da app
-        callGetNoticias("business", view)
+        callGetNoticias("","business", view)
 
         // Filtrar as noticias de acordo com o filtro selecionado nas Tabs
         val tabLayout = view.findViewById<TabLayout>(R.id.tabLayout);
@@ -59,25 +59,32 @@ class SearchFragment : Fragment() {
             override fun onTabSelected(tab: TabLayout.Tab){
                 when(tab.position){
                     0 -> {
-                        callGetNoticias("business", view)
+                        filtroSelecionado = "business"
+                        callGetNoticias("", "business", view)
                     }
                     1 -> {
-                        callGetNoticias("entertainment", view)
+                        filtroSelecionado = "entertainment"
+                        callGetNoticias("","entertainment", view)
                     }
                     2 -> {
-                        callGetNoticias("general", view)
+                        filtroSelecionado = "general"
+                        callGetNoticias("","general", view)
                     }
                     3 -> {
-                        callGetNoticias("health", view)
+                        filtroSelecionado = "health"
+                        callGetNoticias("","health", view)
                     }
                     4 -> {
-                        callGetNoticias("science", view)
+                        filtroSelecionado = "science"
+                        callGetNoticias("","science", view)
                     }
                     5 -> {
-                        callGetNoticias("sports", view)
+                        filtroSelecionado = "sports"
+                        callGetNoticias("","sports", view)
                     }
                     6 -> {
-                        callGetNoticias("technology", view)
+                        filtroSelecionado = "technology"
+                        callGetNoticias("","technology", view)
                     }
                 }
             }
@@ -94,7 +101,8 @@ class SearchFragment : Fragment() {
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                
+                //Fazer a pesquisa de maneira filtrada
+                callGetNoticias(query,filtroSelecionado, view)
                 return true
             }
 
@@ -146,9 +154,9 @@ class SearchFragment : Fragment() {
         )
     }
 
-    private fun callGetNoticias(filtro: String, view: View){
+    private fun callGetNoticias(q: String, filtro: String, view: View){
 
-        getNoticias("", "us", filtro) {
+        getNoticias(q, "us", filtro) {
             if (it != null) {
                 //configure List
                 val noticia : List<Noticia> = it.articles

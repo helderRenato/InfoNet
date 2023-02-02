@@ -63,19 +63,6 @@
                 android:layout_height="wrap_content">
             </TextView>
 
-            <TextView
-                android:id="@+id/lerMaisTarde"
-                android:textSize="10sp"
-                android:textStyle="bold"
-                android:textColor="#C9CACA"
-                android:maxLines="1"
-                android:text="Ler mais tarde"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </TextView>
-
-
-
         </LinearLayout>
     </LinearLayout>
 

@@ -3,6 +3,7 @@ package com.example.mobile
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import com.example.mobile.fragment.AboutFragment
 import com.example.mobile.fragment.HomeFragment
 import com.example.mobile.fragment.PerfilFragment
 import com.example.mobile.fragment.SearchFragment
@@ -23,6 +24,7 @@ class HomeActivity : AppCompatActivity() {
                 R.id.home -> replaceFragment(HomeFragment())
                 R.id.perfil -> replaceFragment(PerfilFragment())
                 R.id.search -> replaceFragment(SearchFragment())
+                R.id.about -> replaceFragment(AboutFragment())
                 else -> {
                     //
                 }

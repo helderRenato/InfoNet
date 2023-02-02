@@ -12,4 +12,8 @@
     <item android:title="Perfil"
         android:id="@+id/perfil"
         android:icon="@drawable/profile"/>
+
+    <item android:title="About"
+        android:id="@+id/about"
+        android:icon="@drawable/about"/>
 </menu>
