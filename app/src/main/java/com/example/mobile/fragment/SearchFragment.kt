@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.mobile.R
@@ -35,7 +37,7 @@ class SearchFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
+    private var progressDialog: ProgressDialog? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -49,8 +51,9 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_search, container, false)
-
+        progressDialog = ProgressDialog(activity)
         var filtroSelecionado : String = "business"
+
         //Fazer a pesquisa para o filtro de business já que é o filtro padrão da app
         callGetNoticias("","business", view)
 
@@ -146,20 +149,21 @@ class SearchFragment : Fragment() {
                 override fun onFailure(call: Call<RespostaAPI>, t: Throwable) {
                     t.printStackTrace()
                     onResult(null)
+                    progressDialog!!.dismiss()
                 }
 
                 override fun onResponse(call: Call<RespostaAPI>, response: Response<RespostaAPI>) {
                     val addedUser = response.body()
                     onResult(addedUser)
+                    progressDialog!!.dismiss()
                 }
             }
         )
     }
 
     private fun callGetNoticias(q: String, filtro: String, view: View){
-        val progressDialog : ProgressDialog = ProgressDialog(view.context)
-        progressDialog.setTitle("A procurar...")
-        progressDialog.show()
+        progressDialog!!.setMessage("A procurar...")
+        progressDialog!!.show()
         getNoticias(q, "us", filtro) {
             if (it != null) {
                 //configure List
@@ -171,14 +175,17 @@ class SearchFragment : Fragment() {
                 recyclerView.layoutManager = layoutManager
             }
         }
-        progressDialog.dismiss()
     }
 
-    public fun replaceFragment(fragment: Fragment){
+    public fun replaceFragment(fragment: NoticiaFragment, fragment1: Fragment){
+        fragment.setBackFragment(fragment1)
         parentFragmentManager.beginTransaction().apply {
+            this.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             replace(R.id.frame_layout, fragment)
                 .commit()
         }
     }
+
+
 
 }

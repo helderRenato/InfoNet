@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.FragmentTransaction
 import com.example.mobile.R
 import com.squareup.picasso.Picasso
 
@@ -24,6 +25,7 @@ class NoticiaFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private var backFragment: Fragment = Fragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +50,14 @@ class NoticiaFragment : Fragment() {
         view.findViewById<TextView>(R.id.conteudoNot).text = conteudo
 
         Picasso.get().load(image).into(view.findViewById<ImageView>(R.id.imgNot))
+
+
+        //Voltar ao fragment anterior assim que o utilizador clicar em voltar
+        val goBck = view.findViewById<TextView>(R.id.goBack)
+        goBck.setOnClickListener{
+            goBack()
+        }
+
         // Inflate the layout for this fragment
         return view
     }
@@ -70,5 +80,17 @@ class NoticiaFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    private fun goBack(){
+        parentFragmentManager.beginTransaction().apply {
+            this.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+            replace(R.id.frame_layout, backFragment)
+                .commit()
+        }
+    }
+
+    public fun setBackFragment(fragment: Fragment){
+        backFragment = fragment
     }
 }

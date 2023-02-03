@@ -66,7 +66,7 @@ class SearchAdapter(private val noticias: List<Noticia>?, private val context: S
                 val noticiaFragment = NoticiaFragment()
                 noticiaFragment.arguments = bundle
 
-                context.replaceFragment(noticiaFragment)
+                context.replaceFragment(noticiaFragment, context)
 
             }
         }

@@ -40,6 +40,7 @@ class LoginActivity : AppCompatActivity() {
                     if(it.isSuccessful){
                         val intent = Intent(this, HomeActivity::class.java)
                         startActivity(intent)
+                        finish()
                     }else{
                         if(email.isEmpty()){
                             emailField.error = "Por favor preencha o email"

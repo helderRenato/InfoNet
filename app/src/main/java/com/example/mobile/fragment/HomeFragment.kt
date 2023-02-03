@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.mobile.R
@@ -32,6 +33,7 @@ class HomeFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private var progressDialog: ProgressDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,12 +47,12 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        progressDialog = ProgressDialog(activity)
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         //Apresentar ao utilizador que a app esta a buscar as noticias
-        val progressDialog = ProgressDialog(view.context)
-        progressDialog.setMessage("A procurar...")
-        progressDialog.show()
+        progressDialog!!.setMessage("A procurar...")
+        progressDialog!!.show()
 
         //get Noticias
         getNoticias("", "us", "entertainment") {
@@ -64,7 +66,7 @@ class HomeFragment : Fragment() {
                 recyclerView.layoutManager = layoutManager
             }
         }
-        progressDialog.dismiss()
+
 
 
         return view
@@ -98,18 +100,22 @@ class HomeFragment : Fragment() {
                 override fun onFailure(call: Call<RespostaAPI>, t: Throwable) {
                     t.printStackTrace()
                     onResult(null)
+                    progressDialog!!.dismiss()
                 }
 
                 override fun onResponse(call: Call<RespostaAPI>, response: Response<RespostaAPI>) {
                     val addedUser = response.body()
                     onResult(addedUser)
+                    progressDialog!!.dismiss()
                 }
             }
         )
     }
 
-    public fun replaceFragment(fragment: Fragment){
+    public fun replaceFragment(fragment: NoticiaFragment, fragment1: Fragment){
+        fragment.setBackFragment(fragment1)
         parentFragmentManager.beginTransaction().apply {
+            this.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             replace(R.id.frame_layout, fragment)
                 .commit()
         }

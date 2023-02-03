@@ -51,6 +51,7 @@ class RegisterActivity : AppCompatActivity() {
                                     //redirecionar para a Home Page
                                     val intent = Intent(this, HomeActivity::class.java)
                                     startActivity(intent)
+                                    finish()
                                 }else {
                                     val alertDialog : AlertDialog.Builder = AlertDialog.Builder(this)
                                     alertDialog.setMessage(it.exception.toString())

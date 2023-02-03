@@ -65,7 +65,7 @@ class HomeAdapter(private val noticias: List<Noticia>?, private val context: Hom
                 val noticiaFragment = NoticiaFragment()
                 noticiaFragment.arguments = bundle
 
-                context.replaceFragment(noticiaFragment)
+                context.replaceFragment(noticiaFragment, context)
 
             }
         }
