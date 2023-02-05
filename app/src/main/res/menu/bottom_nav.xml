@@ -16,4 +16,8 @@
     <item android:title="About"
         android:id="@+id/about"
         android:icon="@drawable/about"/>
+
+    <item android:title="Ler Mais Tarde"
+        android:id="@+id/lerMaisTardeMenu"
+        android:icon="@drawable/later"/>
 </menu>

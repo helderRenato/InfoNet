@@ -10,6 +10,7 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobile.R
 import com.example.mobile.api.model.Noticia
+import com.example.mobile.api.model.Origem
 import com.example.mobile.fragment.HomeFragment
 import com.example.mobile.fragment.NoticiaFragment
 import com.squareup.picasso.Picasso
@@ -56,11 +57,22 @@ class HomeAdapter(private val noticias: List<Noticia>?, private val context: Hom
                 val source = noticia.source
                 val conteudo = noticia.content
                 val image = noticia.urlToImage
+                val author = noticia.author
+                val description = noticia.description
+                val url = noticia.url
+                val urlToImage = noticia.urlToImage
+                val publishedAt = noticia.publishedAt
 
                 bundle.putString("title", titulo)
                 bundle.putString("source", source.name)
+                bundle.putSerializable("Origem", source)
                 bundle.putString("conteudo", conteudo)
                 bundle.putString("image", image)
+                bundle.putString("author", author)
+                bundle.putString("description", description)
+                bundle.putString("url", url)
+                bundle.putString("urlToImage", urlToImage)
+                bundle.putString("publishedAt", publishedAt)
 
                 val noticiaFragment = NoticiaFragment()
                 noticiaFragment.arguments = bundle

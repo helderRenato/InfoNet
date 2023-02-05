@@ -3,10 +3,7 @@ package com.example.mobile
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.example.mobile.fragment.AboutFragment
-import com.example.mobile.fragment.HomeFragment
-import com.example.mobile.fragment.PerfilFragment
-import com.example.mobile.fragment.SearchFragment
+import com.example.mobile.fragment.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -25,6 +22,7 @@ class HomeActivity : AppCompatActivity() {
                 R.id.perfil -> replaceFragment(PerfilFragment())
                 R.id.search -> replaceFragment(SearchFragment())
                 R.id.about -> replaceFragment(AboutFragment())
+                R.id.lerMaisTardeMenu -> replaceFragment(LerMaisTardeFragment())
                 else -> {
                     //
                 }
@@ -34,7 +32,7 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    private fun replaceFragment(fragment: Fragment){
+    public fun replaceFragment(fragment: Fragment){
         val fragmentManager = supportFragmentManager
         val fragmentTransition = fragmentManager.beginTransaction()
         fragmentTransition.replace(R.id.frame_layout, fragment)

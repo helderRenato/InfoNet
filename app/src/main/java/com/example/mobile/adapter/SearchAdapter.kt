@@ -57,11 +57,22 @@ class SearchAdapter(private val noticias: List<Noticia>?, private val context: S
                 val source = noticia.source
                 val conteudo = noticia.content
                 val image = noticia.urlToImage
+                val author = noticia.author
+                val description = noticia.description
+                val url = noticia.url
+                val urlToImage = noticia.urlToImage
+                val publishedAt = noticia.publishedAt
 
                 bundle.putString("title", titulo)
                 bundle.putString("source", source.name)
+                bundle.putSerializable("Origem", source)
                 bundle.putString("conteudo", conteudo)
                 bundle.putString("image", image)
+                bundle.putString("author", author)
+                bundle.putString("description", description)
+                bundle.putString("url", url)
+                bundle.putString("urlToImage", urlToImage)
+                bundle.putString("publishedAt", publishedAt)
 
                 val noticiaFragment = NoticiaFragment()
                 noticiaFragment.arguments = bundle

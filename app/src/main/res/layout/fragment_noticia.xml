@@ -33,6 +33,19 @@
                     />
 
                 <TextView
+                    android:id="@+id/lerMaisTarde"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ler Mais Tarde"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="20dp"
+                    android:textAlignment="viewEnd"
+                    android:drawableEnd="@drawable/later"
+                    android:textSize="15dp"
+                    />
+
+                <TextView
                     android:id="@+id/tituloNot"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
