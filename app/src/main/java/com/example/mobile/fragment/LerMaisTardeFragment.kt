@@ -1,5 +1,6 @@
 package com.example.mobile.fragment
 
+import android.R.attr.data
 import android.app.ProgressDialog
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -24,6 +25,7 @@ import com.google.firebase.database.ValueEventListener
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -109,6 +111,19 @@ class LerMaisTardeFragment : Fragment() {
                             override fun onDataChange(snapshot: DataSnapshot) {
                                 if(snapshot.value == null){
                                     //atualizar o fragment
+                                    val size: Int = listaNoticia.size
+                                    if (size > 0) {
+                                        for (i in 0 until size) {
+                                            listaNoticia.removeAt(0)
+                                        }
+                                        val recyclerView: RecyclerView = view.findViewById(R.id.reciclerViewLerMaisTarde)
+                                        recyclerView.adapter?.notifyItemRangeRemoved(0, size)
+                                    }
+
+                                    val alertDialog = activity?.let { AlertDialog.Builder(it) }
+                                    alertDialog?.setMessage("Noticia Eliminada atualize a página")
+                                    alertDialog?.setNeutralButton("OK", null)
+                                    alertDialog?.show()
                                 }else {
                                     val noticia = snapshot.value as HashMap<*, *>
                                     for (not in noticia) {

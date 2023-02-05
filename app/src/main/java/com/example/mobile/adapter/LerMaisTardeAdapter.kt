@@ -39,6 +39,7 @@ class LerMaisTardeAdapter(private val noticias: List<Noticia>?, private val cont
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = context.layoutInflater.inflate(R.layout.noticia, parent, false)
+
         return ViewHolder(view)
     }
 
@@ -48,6 +49,8 @@ class LerMaisTardeAdapter(private val noticias: List<Noticia>?, private val cont
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindView(noticia: Noticia, context: LerMaisTardeFragment) {
+
+
             val image = itemView.findViewById<ImageView>(R.id.noticiaImg)
             val titulo = itemView.findViewById<TextView>(R.id.noticiaTit)
             val data = itemView.findViewById<TextView>(R.id.noticiaDt)

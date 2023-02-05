@@ -129,31 +129,33 @@ class NoticiaFragment : Fragment() {
     }
 
     public fun adicionarNoticiaLerMaisTarde(noticia: Noticia){
-        var databaseRef: DatabaseReference
+
         try{
-            databaseRef = database.reference.child(firebaseAuth.currentUser!!.uid).child(noticia.title)
+            val databaseRef = database.reference.child(firebaseAuth.currentUser!!.uid).child(noticia.title)
+            val noticiaLerMaisTarde : NoticiaLerMaisTarde = NoticiaLerMaisTarde(noticia)
+            val alertDialog = activity?.let { AlertDialog.Builder(it) }
+
+            databaseRef.setValue(noticiaLerMaisTarde).addOnCompleteListener {
+                if(it.isSuccessful) {
+                    if (alertDialog != null) {
+                        alertDialog.setMessage("Noticia adicionada para ler mais tarde")
+                        alertDialog.setNeutralButton("OK", null)
+                        alertDialog.show()
+                    }
+                }else {
+                    if (alertDialog != null) {
+                        alertDialog.setMessage(it.exception.toString())
+                        alertDialog.setNeutralButton("OK", null)
+                        alertDialog.show()
+                    }
+                }
+            }
         }catch (e: DatabaseException){
+            val alertDialog = activity?.let { AlertDialog.Builder(it) }
             alertDialog?.setMessage("Não é possivel adicionar esta noticia por dificuldades na base de dados")
             alertDialog?.setNeutralButton("OK", null)
             alertDialog?.show()
         }
-        val noticiaLerMaisTarde : NoticiaLerMaisTarde = NoticiaLerMaisTarde(noticia)
-        val alertDialog = activity?.let { AlertDialog.Builder(it) }
 
-        databaseRef.setValue(noticiaLerMaisTarde).addOnCompleteListener {
-            if(it.isSuccessful) {
-                if (alertDialog != null) {
-                    alertDialog.setMessage("Noticia adicionada para ler mais tarde")
-                    alertDialog.setNeutralButton("OK", null)
-                    alertDialog.show()
-                }
-            }else {
-                if (alertDialog != null) {
-                    alertDialog.setMessage(it.exception.toString())
-                    alertDialog.setNeutralButton("OK", null)
-                    alertDialog.show()
-                }
-            }
-        }
     }
 }
