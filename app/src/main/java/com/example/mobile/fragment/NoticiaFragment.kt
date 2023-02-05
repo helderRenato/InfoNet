@@ -17,6 +17,8 @@ import com.example.mobile.api.model.NoticiaLerMaisTarde
 import com.example.mobile.api.model.Origem
 import com.example.mobile.api.model.Utilizador
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseException
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.squareup.picasso.Picasso
 
@@ -127,7 +129,14 @@ class NoticiaFragment : Fragment() {
     }
 
     public fun adicionarNoticiaLerMaisTarde(noticia: Noticia){
-        val databaseRef = database.reference.child(firebaseAuth.currentUser!!.uid).child(noticia.title)
+        var databaseRef: DatabaseReference
+        try{
+            databaseRef = database.reference.child(firebaseAuth.currentUser!!.uid).child(noticia.title)
+        }catch (e: DatabaseException){
+            alertDialog?.setMessage("Não é possivel adicionar esta noticia por dificuldades na base de dados")
+            alertDialog?.setNeutralButton("OK", null)
+            alertDialog?.show()
+        }
         val noticiaLerMaisTarde : NoticiaLerMaisTarde = NoticiaLerMaisTarde(noticia)
         val alertDialog = activity?.let { AlertDialog.Builder(it) }
 

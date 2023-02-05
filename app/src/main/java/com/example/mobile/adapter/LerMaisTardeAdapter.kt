@@ -1,14 +1,17 @@
 package com.example.mobile.adapter
 
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.example.mobile.HomeActivity
 import com.example.mobile.R
 import com.example.mobile.api.model.Noticia
 import com.example.mobile.api.model.Origem

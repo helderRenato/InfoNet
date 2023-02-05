@@ -109,9 +109,6 @@ class LerMaisTardeFragment : Fragment() {
                             override fun onDataChange(snapshot: DataSnapshot) {
                                 if(snapshot.value == null){
                                     //atualizar o fragment
-                                    getFragmentManager()?.beginTransaction()?.detach(context)?.attach(context)
-                                        ?.commit();
-
                                 }else {
                                     val noticia = snapshot.value as HashMap<*, *>
                                     for (not in noticia) {
