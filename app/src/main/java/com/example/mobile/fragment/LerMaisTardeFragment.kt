@@ -112,6 +112,7 @@ class LerMaisTardeFragment : Fragment() {
                                 if(snapshot.value == null){
                                     //atualizar o fragment
                                     val size: Int = listaNoticia.size
+                                    //Esta parte do codigo foi alterada para com as minhas necessidade mas teve origem no stackoverflow com o link: https://stackoverflow.com/questions/29978695/remove-all-items-from-recyclerview
                                     if (size > 0) {
                                         for (i in 0 until size) {
                                             listaNoticia.removeAt(0)
